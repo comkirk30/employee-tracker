@@ -29,4 +29,3 @@ VALUES
 ('Kathleen', 'Kiley', 4, 3),
 ('Justin', 'Love', 5, 1),
 ('Burton', 'Leon', 5, 2);
-()
