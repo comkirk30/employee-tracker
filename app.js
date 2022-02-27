@@ -205,7 +205,6 @@ const addEmployeeQuestions = [
             console.table(results);
           });
           chooseEmployee();
-          
       }
     });
   }
