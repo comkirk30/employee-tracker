@@ -1,8 +1,9 @@
 const inquirer = require('inquirer');
-const cTable = require('console.table');
+const table = require('console.table');
 const db = require('./db/connection');
 
-const startMenuQuestion = [
+const promptUser = () => {
+  inquirer.prompt([
     {
       type: 'list',
       name: 'startMenuQuestion',
