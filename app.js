@@ -147,4 +147,76 @@ const addEmployeeQuestions = [
     startMenu();
   }
 
+  const startMenu = async() => {
+    const result = await inquirer.prompt(startMenuQuestion)
+    .then(function(result) {
+      switch (result.startMenuQuestion) {
+        case "Show all Roles":
+          db.query('SELECT role.id, role.title, role.salary, department.name AS department_name FROM role LEFT JOIN department ON role.department_id = department.id', function (err, results) {
+            console.log("");
+            console.table(results);
+          });
+          startMenu();
+          break;
+        
+        case "Add a Role":
+          db.query('SELECT * FROM department', function (err, results) {
+            console.log("");
+            console.table(results);
+          });
+          addRole();
+          break;
   
+        case "Show All Departments":
+          db.query('SELECT * FROM department', function (err, results) {
+            console.log("");
+            console.table(results);
+          });
+          startMenu();
+          break;
+  
+        case "Add a Department":
+          addDepartment();
+          break;
+  
+        case "Show All Employees":
+          db.query("SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary, CONCAT(manager.first_name, ' ', manager.last_name) AS manager FROM employee LEFT JOIN role on employee.role_id = role.id LEFT JOIN department on role.department_id = department.id LEFT JOIN employee manager on manager.id = employee.manager_id;", function (err, results) {
+            console.log("");
+            console.table(results);
+          });
+          startMenu();
+          break;
+  
+        case "Add an Employee":
+          db.query('SELECT role.*, department.name AS department_name FROM role LEFT JOIN department ON role.department_id = department.id', function (err, results) {
+            console.log("");
+            console.table(results);
+          });
+          db.query('SELECT employee.*, role.title AS role_title FROM employee LEFT JOIN role ON employee.role_id = role.id', function (err, results) {
+            console.log("");
+            console.table(results);
+          });
+          addEmployee();
+          break;
+  
+        case "Update an Employee's Role":
+          db.query('SELECT employee.id, employee.first_name, employee.last_name FROM employee', function (err, results) {
+            console.log("");
+            console.table(results);
+          });
+          chooseEmployee();
+          break;
+      }
+    });
+  }
+  
+ 
+  const startApp = async() => {
+    console.log('Welcome to the Employee Tracker!');
+    console.log('Please choose an option below to get started:');
+  
+    startMenu();
+  }
+  
+    
+  startApp();
