@@ -17,7 +17,6 @@ VALUES
      ('Director of Marketing', '125000', 4),
      ('Marketing Coordinator', '85000', 4),
      ('Marketing Intern', '30000', 4),
-     ('Director of Lifestyle', '125000', 5),
      ('Content Creator', '65000', 5);
 
 INSERT INTO employee(first_name, last_name, role_id, manager_id)
