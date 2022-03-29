@@ -1,7 +1,7 @@
 const inquirer = require('inquirer');
 const db = require('./db/query');
 const cTable = require('console.table');
-const { showAllDepartments } = require('./db/query');
+const dbConnect = require('./db/connection');
 
 
 const promptUser = () => {
@@ -137,11 +137,17 @@ const addEmployeeQuestion = [
 
 
   const addRole = () => {
-    db.showAllDepartments().then((rows)=>
-    {
-      let departments=rows;
-      console.log(rows);
+    let departments=[]
+    dbConnect.query('Select * from department', function(err, res){
+      for (let i = 0; i < res.length; i++){
+        departments.push({
+          name: res[i].name, 
+          values: res[i].id,
+
+        })
+      }
     })
+    console.log (departments)
     inquirer
     .prompt([
         {
@@ -155,9 +161,10 @@ const addEmployeeQuestion = [
           message: 'Salary of the new role?',
       },
       {
-          type: 'input',
+          type: 'list',
           name: 'department',
           message: 'What department is the new role part of?',
+          choices: departments
       }
   
     ])
