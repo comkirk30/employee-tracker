@@ -142,7 +142,7 @@ const addEmployeeQuestion = [
       for (let i = 0; i < res.length; i++){
         departments.push({
           name: res[i].name, 
-          values: res[i].id,
+          value: res[i].id,
 
         })
       }
@@ -162,7 +162,7 @@ const addEmployeeQuestion = [
       },
       {
           type: 'list',
-          name: 'department',
+          name: 'department_id',
           message: 'What department is the new role part of?',
           choices: departments
       }
@@ -170,6 +170,7 @@ const addEmployeeQuestion = [
     ])
       .then((response)=>
       {
+        console.log (response)
         db.addRole(response).then(()=> console.log('Successfully added')).then(()=> promptUser())
       }
       )
