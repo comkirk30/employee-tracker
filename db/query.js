@@ -57,9 +57,22 @@ class Query{
             });
         });
     }
-
-
 }
+
+//       addEmployee(name){
+
+//     return new Promise((resolve,reject)=> {
+//         db.query('insert into employee (name) values', name, (err, results)=> {
+//             if(err){
+//                 reject(console.log('err ',err))
+//             }
+//             resolve(()=> "Successfully added new employee");
+//         });
+//     });
+// }
+
+
+
 
 
 module.exports = new Query();

@@ -28,7 +28,6 @@ const promptUser = () => {
       showAllRoles()
     }else if(choice === 'Add Role') {
       addRole();
-
     }
     else if(choice === 'Show All Departments') {
       showAllDepartments()
@@ -37,6 +36,9 @@ const promptUser = () => {
       showAllEmployees()
     }
   
+  else if(choice === 'Add Employee') { 
+    addEmployee()
+  }
     else if(choice === 'Add Department') {
     addDepartment()
   }
@@ -176,37 +178,24 @@ const addEmployeeQuestion = [
       )
     
   
-    
-   
-
-   // startMenu();
   }
 
-  // const addDepartment = async() => {
-  //   const result = await inquirer.prompt(addDepartmentQuestion)
-  //   const sql = `INSERT INTO department (name)
-  //   VALUES (?)`;
-  //   const params = [result.name];
-  
-  //   db.query(sql, params, function (err, results) {
-  //     console.log("");
-  //     console.log(results);
-  //   });
-  //   startMenu();
-  // }
 
-  // const addEmployee = async() => {
-  //   const result = await inquirer.prompt(addEmployeeQuestions)
-  //   const sql = `INSERT INTO employee (first_name, last_name, role_id, manager_id)
-  //   VALUES (?,?,?,?)`;
-  //   const params = [result.first_name, result.last_name, result.role_id, result.manager_id];
+  const addEmployee = () => {
+     inquirer.prompt(addEmployeeQuestion)
+    .then((response)=> {
+      console.log(response)
+    })
+    // const sql = `INSERT INTO employee (first_name, last_name, role_id, manager_id)
+    // VALUES (?,?,?,?)`;
+    // const params = [result.first_name, result.last_name, result.role_id, result.manager_id];
   
-  //   db.query(sql, params, function (err, results) {
-  //     console.log("");
-  //     console.log(results);
-  //   });
-  //   startMenu();
-  // }
+    // db.query(sql, params, function (err, results) {
+    //   console.log("");
+    //   console.log(results);
+    // });
+    // startMenu();
+  }
 
   const chooseEmployee = async() => {
     const result = await inquirer.prompt(chooseEmployeeQuestion);
