@@ -170,6 +170,16 @@ const addEmployeeQuestion = [
         })
       }
     })
+    let managers=[]
+    dbConnect.query('Select * from employee', function(err, res){
+      for (let i = 0; i < res.length; i++){
+        managers.push({
+          name: res[i].first_name + ", " + res[i].last_name, 
+          value: res[i].id,
+
+        })
+      }
+    })
     console.log (roles)
      inquirer
      .prompt([
@@ -190,11 +200,11 @@ const addEmployeeQuestion = [
         choices: roles,
       },
       {
-        type: 'input',
+        type: 'list',
         name: 'manager_id',
         message: 'Who is the manager for the employee?',
+        choices: managers,
       }
-
      ]
      )
 
