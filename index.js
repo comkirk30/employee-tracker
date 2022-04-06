@@ -74,26 +74,7 @@ const addDepartmentQuestion = [
 ]
 
 const addEmployeeQuestion = [
-    {
-      type: 'input',
-      name: 'first_name',
-      message: 'Employee first name',
-    },
-    {
-      type: 'input',
-      name: 'last_name',
-      message: 'Employee last name',
-    },
-    {
-      type: 'input',
-      name: 'role_id',
-      message: 'What is the role for the employee?',
-    },
-    {
-      type: 'input',
-      name: 'manager_id',
-      message: 'Who is the manager for the employee?',
-    }
+
   ]
   
   const chooseEmployeeQuestion = [
@@ -168,7 +149,6 @@ const addEmployeeQuestion = [
           message: 'What department is the new role part of?',
           choices: departments
       }
-  
     ])
       .then((response)=>
       {
@@ -176,16 +156,55 @@ const addEmployeeQuestion = [
         db.addRole(response).then(()=> console.log('Successfully added')).then(()=> promptUser())
       }
       )
-    
-  
   }
 
 
   const addEmployee = () => {
-     inquirer.prompt(addEmployeeQuestion)
+    let roles=[]
+    dbConnect.query('Select * from role', function(err, res){
+      for (let i = 0; i < res.length; i++){
+        roles.push({
+          name: res[i].title, 
+          value: res[i].id,
+
+        })
+      }
+    })
+    console.log (roles)
+     inquirer
+     .prompt([
+      {
+        type: 'input',
+        name: 'first_name',
+        message: 'Employee first name',
+      },
+      {
+        type: 'input',
+        name: 'last_name',
+        message: 'Employee last name',
+      },
+      {
+        type: 'list',
+        name: 'role_id',
+        message: 'What is the role for the employee?',
+        choices: roles,
+      },
+      {
+        type: 'input',
+        name: 'manager_id',
+        message: 'Who is the manager for the employee?',
+      }
+
+     ]
+     )
+
     .then((response)=> {
       console.log(response)
+      db.addEmployee(response).then(()=> console.log('Successfully added')).then(()=>promptUser())
     })
+  }
+  }
+
     // const sql = `INSERT INTO employee (first_name, last_name, role_id, manager_id)
     // VALUES (?,?,?,?)`;
     // const params = [result.first_name, result.last_name, result.role_id, result.manager_id];
@@ -195,7 +214,7 @@ const addEmployeeQuestion = [
     //   console.log(results);
     // });
     // startMenu();
-  }
+  
 
   const chooseEmployee = async() => {
     const result = await inquirer.prompt(chooseEmployeeQuestion);
@@ -284,7 +303,7 @@ const addEmployeeQuestion = [
   
  
 
-}
+
 const startApp  = () => {
   console.log('Welcome to My Employee Log');
   console.log('Please choose an option to begin:');
