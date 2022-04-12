@@ -25,7 +25,7 @@ const promptUser = () => {
       const choice = answers.startMenu;
       console.log(choice);
       if (choice === "Show All Roles") {
-        //to do :
+        
         showAllRoles();
       } else if (choice === "Add Role") {
         addRole();
@@ -199,14 +199,7 @@ const promptUser = () => {
   };
 };
 
-// const chooseEmployee = () => {
-//   const result = await inquirer
-//   .prompt(chooseEmployeeQuestion);
 
-//   dbConnect.query('Select * from role', function(err, res){
-//           console.log("");
-//           console.log(results);
-//         });
 
 const updateEmployeeRole = () => {
   let employees = [];
@@ -250,31 +243,12 @@ const updateEmployeeRole = () => {
         ])
         .then((response) => {
           console.log(response);
-          // db.updateEmployeeRole(employee_id, response.role_id)
-          // .then(() => console.log("Successfully updated"))
-          // .then(() => promptUser());
-          //  db.addEmployee(response)
-          //    .then(() => console.log("Successfully added"))
-          //    .then(() => promptUser());
         });
       });
   });
 };
 
-//  {
-//     type: 'list',
-//     name: 'role_id',
-//     message: 'Which new role do you want for the employee?',
-//   },
 
-// const sql = `UPDATE employee SET role_id = ${result.role_id}
-// WHERE id = ${employeeID}`;
-
-// db.query(sql, function (err, results) {
-//   console.log("");
-//   console.log(results);
-// });
-// startMenu();
 
 const startApp = () => {
   console.log("Welcome to My Employee Log");
