@@ -250,6 +250,9 @@ const updateEmployeeRole = () => {
         ])
         .then((response) => {
           console.log(response);
+          // db.updateEmployeeRole(employee_id, response.role_id)
+          // .then(() => console.log("Successfully updated"))
+          // .then(() => promptUser());
           //  db.addEmployee(response)
           //    .then(() => console.log("Successfully added"))
           //    .then(() => promptUser());

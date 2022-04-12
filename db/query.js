@@ -68,6 +68,14 @@ class Query{
             });
         });
     }
+    updateEmployeeRole(employee_id, role_id){
+        db.query('update employee set', [employee_id, role_id], (err, results)=> {
+            if(err){
+                reject(console.log('err ',err))
+            }
+            resolve(()=> "Successfully updated employee role");
+        });
+    }
 }
     
 
